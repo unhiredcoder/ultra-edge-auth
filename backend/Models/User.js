@@ -23,11 +23,7 @@ const UserSchema = new Schema({
     attempts: { 
         type: Number, 
         default: 0 
-    }, // for login attempts
-    labelVerified: { 
-        type: Boolean, 
-        default: false 
-    } 
+    },
 });
 
 const UserModel = mongoose.model('users', UserSchema);

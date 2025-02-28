@@ -18,7 +18,7 @@ exports.verifyLabel = async (req, res) => {
             return res.status(403).json({ message: 'Too many failed attempts. Access blocked.' });
         }
 
-        const label = await LabelCode.findOne({ code });
+        const label = await LabelCode.findOne({ code:code.toLowerCase() });
 
         if (!label || label.used) {
             user.attempts += 1;
@@ -32,14 +32,10 @@ exports.verifyLabel = async (req, res) => {
 
         // Mark label code as used and assign it to the user
         label.used = true;
-        label.assignedTo = userId;
         await label.save();
-
         // Reset user attempts on success
         user.attempts = 0;
-        user.labelVerified = true;  // Mark label code as verified
         await user.save();
-
         return res.status(200).json({ success: true, message: 'Label code verified successfully.' });
     } catch (error) {
         console.error("Error verifying label:", error);

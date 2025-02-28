@@ -17,6 +17,7 @@ function Login() {
         console.log(name, value);
         setLoginInfo((prev) => ({ ...prev, [name]: value }));
     };
+    console.log(process.env.REACT_APP_BACKEND_URL);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -26,8 +27,10 @@ function Login() {
             return handleError('Email and password are required');
         }
 
+        
+
         try {
-            const url = `http://localhost:8080/auth/login`;
+            const url = `${process.env.REACT_APP_BACKEND_URL}/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {

@@ -10,11 +10,6 @@ const LabelCodeSchema = new Schema({
     used: { 
         type: Boolean, 
         default: false 
-    },
-    assignedTo: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'users', 
-        default: null 
     }
 });
 
